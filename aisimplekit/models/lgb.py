@@ -1,4 +1,5 @@
 """
+Lightgbm algorithm wrapper.
 """
 import lightgbm as lgb
 
@@ -6,6 +7,36 @@ def lgb_train_cv(params, df_train, df_val, predictors, target='target',
 	objective='binary', metrics='auc', feval=None, early_stopping_rounds=20,
 	num_boost_round=3000, verbose_eval=10, categorical_features=None
 ):
+    """Train an lgb model with cross-validation.
+
+    :param params: parameters used to train the lgb model
+    :type params: dict
+    :param df_train: input dataframe
+    :type df_train: pd.DataFrame
+    :param df_val: cross-validation dataframe
+    :type df_val: pd.DataFrame
+    :param predictors: list of predictor columns
+    :type predictors: list[str]
+    :param target: name of target column
+    :type target: str
+    :param objective: objective to train on.
+    :type objective: str
+    :param metrics: evaluation metrics to be monitored while CV
+    :type metrics: str
+    :param feval: customized evaluation function
+    :type feval: callable or None
+    :param early_stopping_rounds: a value activates early stopping
+    :type early_stopping_rounds: int or None
+    :param num_boost_round: number of boosting iterations
+    :type num_boost_round: int
+    :param verbose_eval: specifies if the eval metric is printed on each boosting stage.
+    :type verbose_eval: bool
+    :param categorical_features: list of categorical columns
+    :type categorical_features: list[str]
+
+    :returns: the boosted model, the estimated ideal number of boosting rounds, and the crossvalidation score.
+    :rtype: tuple(lightgbm.Booster, int, float)
+    """
     lgb_params = {
         'boosting_type': 'gbdt', 'objective': objective, 'metric':metrics,
         'learning_rate': 0.2,

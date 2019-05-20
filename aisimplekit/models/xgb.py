@@ -1,4 +1,5 @@
 """
+Xgboost algorithm wrapper.
 """
 import xgboost as xgb
 import gc
@@ -7,7 +8,30 @@ def xgb_train_cv(params, df_train, df_val, predictors, target='target',
     objective='binary:logistic', early_stopping_rounds=25,
     num_boost_round=200, verbose_eval=5
 ):
-    """ """
+    """Train an xgboost model with cross-validation.
+
+    :param params: parameters used to train the xgboost model
+    :type params: dict
+    :param df_train: input dataframe
+    :type df_train: pd.DataFrame
+    :param df_val: cross-validation dataframe
+    :type df_val: pd.DataFrame
+    :param predictors: list of predictor columns
+    :type predictors: list[str]
+    :param target: name of target column
+    :type target: str
+    :param objective: objective to train on.
+    :type objective: str
+    :param early_stopping_rounds: a value activates early stopping
+    :type early_stopping_rounds: int or None
+    :param num_boost_round: number of boosting iterations
+    :type num_boost_round: int
+    :param verbose_eval: specifies if the eval metric is printed on each boosting stage.
+    :type verbose_eval: bool
+
+    :returns: the boosted model
+    :rtype: xgboost.Booster
+    """
     xgb_params = {
         'eta': 0.15,
         'tree_method': "hist",
