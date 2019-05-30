@@ -323,7 +323,7 @@ class RnnTextModel(object):
             df_test,
             max_seq_title_description_length=self.max_seq_title_description_length
         )
-        preds1 = self.model.predict(X_test, batch_size=self.batch_Size, verbose=verbose)
+        preds1 = self.model.predict(X_test, batch_size=self.batch_size, verbose=verbose)
         del(X_test)
         gc.collect()
 
