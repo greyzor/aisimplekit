@@ -5,3 +5,10 @@ xgboost
 catboost
 matplotlib
 kaggle
+nltk
+scipy
+numpy
+seaborn
+matplotlib
+keras
+tensorflow
