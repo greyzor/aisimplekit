@@ -27,5 +27,17 @@ extract_data_av-demandprediction:
 
 	@echo "[warn] not uncompressing: train_jpg_0.zip"
 
+install_fasttext:
+	@echo "Install fasttext russian word embedding vectors.."
+	@mkdir -p notebooks/data/
+	@cd notebooks/data/ && wget https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.ru.300.vec.gz \
+				&& gunzip cc.ru.300.vec.gz && rm -rf cc.ru.300.vec.gz
+
+prepare_challenge_avito: download_data_av-demandprediction-001\
+							extract_data_av-demandprediction\
+							install_fasttext
+
+prepare_challenge_talkingdata: download_data_td-frauddetection-001
+
 all:
 	@kaggle competitions list -s "avito"
