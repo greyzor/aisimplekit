@@ -1,2 +1,6 @@
 *.pyc
 *.ipynb_checkpoints/
+build/
+dist/
+aisimplekit.egg-info/
+notebooks/
